@@ -1,4 +1,4 @@
-# _{Application Name}_
+# _Library Catalog_
 
 #### By Eliot Gronstal
 

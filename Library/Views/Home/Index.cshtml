@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models;
+
+<h1>Welcome to the Library</h1>
+
+<hr>
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>Books for @User.Identity.Name</h4>
+  @if (Model["books"].Length == 0)
+  {
+    <p>No books have been added yet!</p>
+  } 
+  <ul>
+    @foreach (Book book in Model["books"])
+    {
+      <li>@Html.ActionLink(@book.Title, "Details", "Books", new { id = @book.BookId})</li>
+    }
+  </ul>
+}
+else
+{
+  <h4>Books</h4>
+  <p>Please @Html.ActionLink("log in", "LogIn", "Account") to view or manage your books.</p>
+}
+
+<hr>
+
+
+<p>@Html.ActionLink("Manage books", "Index", "Books") | @Html.ActionLink("Manage checkouts", "Index", "Checkouts")</p>
+
+<p>@Html.ActionLink("Manage librarians", "Index", "Librarians") | @Html.ActionLink("Manage patrons", "Index", "Patrons")</p>
+
+<p>@Html.ActionLink("Create or manage an account", "Index", "Account")</p>
