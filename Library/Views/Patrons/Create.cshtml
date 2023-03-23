@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Patron
+
+<h4>Add patron who has a library card:</h4>
+
+<p>@Html.ValidationMessageFor(model => model.PatronName, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.PatronName, "Patron Name")
+  @Html.TextBoxFor(model => model.PatronName)
+
+  <input type="submit" value="Add new patron" />
+}

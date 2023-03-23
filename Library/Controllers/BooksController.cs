@@ -174,7 +174,7 @@ namespace Library.Controllers
     // }
     
 // Search by Title
-    [HttpPost, ActionName("SearchTitle")]
+    [HttpPost, ActionName("Search")]
     public ActionResult Search(string search)
     {
       List<Book> model = _db.Books.Where(book => book.Title.ToLower()
@@ -182,12 +182,25 @@ namespace Library.Controllers
       return View(model);
     }
 
-// Search by Author -- need different ActionResult? figure out how to deal with AuthorName not exisiting as property of Book
-    // [HttpPost, ActionName("SearchAuthor")]
-    // public ActionResult Search(string search)
-    // {
-    //   List<Book> model = _db.Books.Where(book => Book.AuthorName.ToLower()
-    //                       .Contains(search.ToLower())).ToList();
-    // }
+    public ActionResult AddPatron(int id)
+    {
+      Book thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
+      ViewBag.PatronId = new SelectList(_db.Patrons, "PatronId", "PatronName");
+      return View(thisBook);
+    }
+
+    [HttpPost]
+    public ActionResult AddPatron(Book book, int patronId)
+    {
+      #nullable enable
+      BookPatron? joinEntity = _db.BookPatrons.FirstOrDefault(join => (join.PatronId == patronId && join.BookId == book.BookId));
+      #nullable disable
+      if (joinEntity == null && patronId != 0)
+      {
+        _db.BookPatrons.Add(new BookPatron() { PatronId = patronId, BookId = book.BookId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = book.BookId });
+    }
   }
 }

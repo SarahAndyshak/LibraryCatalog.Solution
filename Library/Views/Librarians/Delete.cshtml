@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Librarian
+
+<h2>Are you sure you want to remove this librarian?</h2>
+
+@Html.DisplayNameFor(model => model.LibrarianName): @Html.DisplayFor(model => model.LibrarianName)
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" />
+}

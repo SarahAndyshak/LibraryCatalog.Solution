@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models;
+
+<h1>All Patrons</h1>
+
+@if (@Model.Count == 0)
+{
+  <h3>No patrons have been added yet!</h3>
+} 
+else
+{
+  <ul>
+    @foreach (Patron patron in Model)
+    {
+      <li>@Html.ActionLink($"{patron.PatronName}", "Details", new { id = patron.PatronId })</li>
+    }
+  </ul>
+}
+
+<hr>
+
+@using (Html.BeginForm("Search","Patrons")) {
+<label class="mdl-textfield__label" for="sample3">Search All Patrons:</label>
+<br>
+<input class="mdl-textfield__input" type="text" name="search" id="sample3"><br><br>
+<input type="submit" name = "search" value="Search Patrons"/>
+}
+
+<hr>
+
+<p>@Html.ActionLink("Add a new library patron", "Create")</p>

@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Librarian
+
+<h2>Edit this Librarian</h2>
+
+<h4>Edit this Librarian: @Html.DisplayFor(model => model.LibrarianName)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.LibrarianId)
+
+  @Html.LabelFor(model => model.LibrarianName)
+  @Html.EditorFor(model => model.LibrarianName)
+
+  <input type="submit" value="Save" />
+}

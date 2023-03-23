@@ -137,5 +137,35 @@ namespace Library.Controllers
                               .Contains(search.ToLower())).ToList();
       return View(model);
     }
+
+        public ActionResult AddPatron(int id)
+    {
+      Checkout thisCheckout = _db.Checkouts.FirstOrDefault(checkouts => checkouts.CheckoutId == id);
+      ViewBag.PatronId = new SelectList(_db.Patrons, "PatronId", "PatronName");
+      return View(thisCheckout);
+    }
+
+    [HttpPost]
+    public ActionResult AddPatron(Checkout checkout, int patronId)
+    {
+      #nullable enable
+      CheckoutPatron? joinEntity = _db.CheckoutPatrons.FirstOrDefault(join => (join.PatronId == patronId && join.CheckoutId == checkout.CheckoutId));
+      #nullable disable
+      if (joinEntity == null && patronId != 0)
+      {
+        _db.CheckoutPatrons.Add(new CheckoutPatron() { PatronId = patronId, CheckoutId = checkout.CheckoutId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = checkout.CheckoutId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteCheckoutPatronJoin(int joinId)
+    {
+      CheckoutPatron joinEntry = _db.CheckoutPatrons.FirstOrDefault(entry => entry.CheckoutPatronId == joinId);
+      _db.CheckoutPatrons.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }

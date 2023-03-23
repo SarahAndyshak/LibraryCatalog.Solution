@@ -1,0 +1,41 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Security.Claims
+@using Library.Models
+@model Library.Models.Book
+
+<h2>Book Details</h2>
+<hr />
+<h3>Book Title: @Html.DisplayFor(model => model.Title)</h3>
+
+@if (@Model.JoinAuthorBook.Count == 0)
+{
+  <p>This book has not been assigned to an author yet!</p>
+}
+else
+{
+  <h4>This book was written by:</h4>
+  <ul>
+  @foreach (AuthorBook join in Model.JoinAuthorBook)
+    {
+      <li>Author: @join.Author.AuthorName</li>
+      @using (Html.BeginForm("DeleteJoin", "Books"))
+      {
+        @Html.Hidden("joinId", @join.AuthorBookId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
+
+
+
+<p>@Html.ActionLink("Edit Book", "Edit", new { id = Model.BookId }) | @Html.ActionLink("Delete Book", "Delete", new { id = Model.BookId }) | @Html.ActionLink("Add an Author", "AddAuthor", new {
+  id = Model.BookId })</p>
+
+@* @if (@Model.User.Id.Equals(@ViewBag.CurrentUser))
+{
+  <p>@Html.ActionLink("Edit Recipe", "Edit", new { id = Model.RecipeId }) | @Html.ActionLink("Add a Tag", "AddTag", new { id = Model.RecipeId }) | @Html.ActionLink("Delete Recipe", "Delete", new { id = Model.RecipeId })</p>
+} *@

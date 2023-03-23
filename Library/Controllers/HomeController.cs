@@ -24,15 +24,15 @@ namespace Library.Controllers
     {
       Dictionary<string, object[]> model = new Dictionary<string, object[]>();
       
-      //Recipe logic
+      // Checkout display logic
       string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
       if (currentUser != null)
       {
-        Checkout[] checkouts = _db.Checkouts
+        Book[] books = _db.Books
                         .Where(entry => entry.User.Id == currentUser.Id)
                         .ToArray();
-        model.Add("checkouts", checkouts);
+        model.Add("books", books);
       }
       return View(model);
     }

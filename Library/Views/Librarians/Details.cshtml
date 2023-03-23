@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Librarian
+
+<h2>Librarian Details</h2>
+<hr />
+<h3>Librarian Name: @Html.DisplayFor(model => model.LibrarianName)</h3>
+
+<p>@Html.ActionLink("Edit Librarian", "Edit", new { id = Model.LibrarianId }) | @Html.ActionLink("Delete Librarian", "Delete", new { id = Model.LibrarianId })

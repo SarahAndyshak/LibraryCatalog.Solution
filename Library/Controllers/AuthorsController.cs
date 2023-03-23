@@ -123,5 +123,13 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [HttpPost, ActionName("Search")]
+    public ActionResult Search(string search)
+    {
+      List<Author> model = _db.Authors.Where(author => author.AuthorName.ToLower()
+                          .Contains(search.ToLower())).ToList();
+      return View(model);
+    }
   }
 }

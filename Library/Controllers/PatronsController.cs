@@ -54,11 +54,11 @@ namespace Library.Controllers
         return RedirectToAction("Index");
       }
     }
-
-// This one works, do not delete
     public ActionResult Details(int id)
     {
       Patron thisPatron = _db.Patrons
+            .Include(patron => patron.JoinBookPatron)
+            .ThenInclude(join => join.Book)
             .Include(patron => patron.JoinCheckoutPatron)
             .ThenInclude(join => join.Checkout)
             .FirstOrDefault(patron => patron.PatronId == id);

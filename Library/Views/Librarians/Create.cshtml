@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Librarian
+
+<h4>Add a new librarian</h4>
+
+<p>@Html.ValidationMessageFor(model => model.LibrarianName, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+@using (Html.BeginForm())
+
+{
+  @Html.LabelFor(model => model.LibrarianName, "Librarian Name")
+  @Html.TextBoxFor(model => model.LibrarianName)
+
+  <input type="submit" value="Add new Librarian" />
+}

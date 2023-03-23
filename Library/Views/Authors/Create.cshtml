@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Author
+
+<h4>Add a new author</h4>
+
+<p>@Html.ValidationMessageFor(model => model.AuthorName, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.AuthorName, "Author Name")
+  @Html.TextBoxFor(model => model.AuthorName)
+
+  <input type="submit" value="Add new author" />
+}

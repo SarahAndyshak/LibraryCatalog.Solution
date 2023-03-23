@@ -1,0 +1,41 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Security.Claims
+@using Library.Models
+@model Library.Models.Author
+
+<h2>Author Details</h2>
+<hr />
+<h3>Author's Name: @Html.DisplayFor(model => model.AuthorName)</h3>
+
+@if (@Model.JoinAuthorBook.Count == 0)
+{
+  <p>No books have been listed for this author yet!</p>
+}
+else
+{
+  <h4>This author has written the following books:</h4>
+  <ul>
+  @foreach (AuthorBook join in Model.JoinAuthorBook)
+    {
+      <li>Book: @join.Book.Title</li>
+      @using (Html.BeginForm("DeleteJoin", "Authors"))
+      {
+        @Html.Hidden("joinId", @join.AuthorBookId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
+
+
+
+<p>@Html.ActionLink("Edit Author", "Edit", new { id = Model.AuthorId }) | @Html.ActionLink("Delete Author", "Delete", new { id = Model.AuthorId }) | @Html.ActionLink("Add an Author", "AddAuthor", new {
+  id = Model.AuthorId })</p>
+
+@* @if (@Model.User.Id.Equals(@ViewBag.CurrentUser))
+{
+  <p>@Html.ActionLink("Edit Recipe", "Edit", new { id = Model.RecipeId }) | @Html.ActionLink("Add a Tag", "AddTag", new { id = Model.RecipeId }) | @Html.ActionLink("Delete Recipe", "Delete", new { id = Model.RecipeId })</p>
+} *@

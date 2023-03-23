@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Book
+
+<h4>Add a new recipe</h4>
+
+<p>@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Title, "Book Title")
+  @Html.TextBoxFor(model => model.Title)
+
+@* 
+  @Html.LabelFor(model => model.Ranking)
+  @Html.DropDownListFor(model => model.Ranking,
+  new SelectList(Enum.GetValues(typeof(Rating)))) *@
+  
+  @* @Html.LabelFor(model => model.Ranking)
+  @Html.TextBoxFor(model => model.Ranking) *@
+
+  <input type="submit" value="Add new book" />
+}

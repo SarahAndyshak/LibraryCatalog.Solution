@@ -1,0 +1,55 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Security.Claims
+@using Library.Models
+@model Library.Models.Patron
+
+<h2>Patron Details</h2>
+<hr />
+<h3>Patron Name: @Html.DisplayFor(model => model.PatronName)</h3>
+
+@if (@Model.JoinBookPatron.Count == 0)
+{
+  <p>This patron does not have any books checked out via JoinBookPatron.</p>
+}
+else
+{
+  <h4>This patron has checked out the following books via JoinBookPatron:</h4>
+  <ul>
+  @foreach (BookPatron join in Model.JoinBookPatron)
+    {
+      <li>Book: @join.Book.Title</li>
+      @using (Html.BeginForm("DeleteJoin", "Books"))
+      {
+        @Html.Hidden("joinId", @join.BookPatronId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
+
+@if (@Model.JoinCheckoutPatron.Count == 0)
+{
+  <p>This patron has borrowed books, but not via JoinPatronCheckout.</p>
+}
+else
+{
+  <h4>This patron has checked out the following books via JoinPatronCheckout:</h4>
+  <ul>
+  @foreach (CheckoutPatron join in Model.JoinCheckoutPatron)
+    {
+      <li>Book: @join.Checkout.History</li>
+      @using (Html.BeginForm("DeleteJoin", "Checkout"))
+      {
+        @Html.Hidden("joinId", @join.CheckoutPatronId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Patron", "Edit", new { id = Model.PatronId }) | @Html.ActionLink("Delete Patron", "Delete", new { id = Model.PatronId }) | @Html.ActionLink("Add a Book", "AddBook", new {
+  id = Model.PatronId }) | @Html.ActionLink("Checkout Library Book", "AddCheckout", new {
+  id = Model.PatronId })</p>
