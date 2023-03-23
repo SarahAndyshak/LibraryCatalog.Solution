@@ -28,8 +28,8 @@ namespace Library.Controllers
     {
       string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-      // List<Catalog> model = _db.Catalogs.OrderBy(catalog => catalog.Ranking).ToList();
-      return View();
+      List<Catalog> model = _db.Catalogs.ToList();
+      return View(model);
     }
 
     public ActionResult Create()

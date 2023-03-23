@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Checkout
+
+<h2>Add a patro </h2>
+
+<h4>Add a patron to this checkout: @Html.DisplayFor(model => model.History)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.CheckoutId)
+
+    @Html.Label("Select patron")
+    @Html.DropDownList("PatronId")
+
+    <input type="submit" class="button" value="Save" />
+}

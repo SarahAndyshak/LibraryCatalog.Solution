@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Checkout
+
+<h4>Add a new checkout for the library</h4>
+
+<p>@Html.ValidationMessageFor(model => model.History, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.History, "History of Checkouts")
+  @Html.TextBoxFor(model => model.History)
+
+  <input type="submit" class="button" value="Add new checkout" />
+}

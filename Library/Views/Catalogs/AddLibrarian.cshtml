@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Catalog
+
+<h2>Add a librarian </h2>
+
+<h4>Add a librarian to manage this catalog: @Html.DisplayFor(model => model.Quantity)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.CatalogId)
+
+    @Html.Label("Select librarian")
+    @Html.DropDownList("LibrarianId")
+
+    <input type="submit" class="button" value="Save" />
+}

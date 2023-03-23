@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Catalog
+
+<h2>Edit this Catalog</h2>
+
+<h4>Edit this Catalog: @Html.DisplayFor(model => model.Quantity)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.CatalogId)
+
+  @Html.LabelFor(model => model.Quantity)
+  @Html.EditorFor(model => model.Quantity)
+
+  <input type="submit" class="button" value="Save" />
+}

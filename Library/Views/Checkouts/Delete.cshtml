@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Checkout
+
+<h2>Are you sure you want to remove this checkout?</h2>
+
+@Html.DisplayNameFor(model => model.History): @Html.DisplayFor(model => model.History)
+@using (Html.BeginForm())
+{
+  <input type="submit" class="button" value="Delete" />
+}

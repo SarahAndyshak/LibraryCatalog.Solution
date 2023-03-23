@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Checkout
+
+<h2>Edit this Checkout</h2>
+
+<h4>Edit this Checkout: @Html.DisplayFor(model => model.History)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.CheckoutId)
+
+  @Html.LabelFor(model => model.History)
+  @Html.EditorFor(model => model.History)
+
+  <input type="submit" class="button" value="Save" />
+}

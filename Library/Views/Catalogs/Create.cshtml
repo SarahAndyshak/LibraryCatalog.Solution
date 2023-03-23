@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+@model Library.Models.Catalog
+
+<h4>Create a new catalog for the library</h4>
+
+<p>@Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Quantity, "Catalog")
+  @Html.TextBoxFor(model => model.Quantity)
+
+  <input type="submit" class="button" value="Create catalog" />
+}

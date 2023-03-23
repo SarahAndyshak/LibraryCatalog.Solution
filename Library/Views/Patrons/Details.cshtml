@@ -24,7 +24,7 @@ else
       @using (Html.BeginForm("DeleteJoin", "Books"))
       {
         @Html.Hidden("joinId", @join.BookPatronId)
-        <input type="submit" value="Delete" />
+        <input type="submit" class="button" value="Delete" />
       }
     }
   </ul>
@@ -44,7 +44,7 @@ else
       @using (Html.BeginForm("DeleteJoin", "Checkout"))
       {
         @Html.Hidden("joinId", @join.CheckoutPatronId)
-        <input type="submit" value="Delete" />
+        <input type="submit" class="button" value="Delete" />
       }
     }
   </ul>

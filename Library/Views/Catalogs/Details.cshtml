@@ -1,0 +1,35 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Security.Claims
+@using Library.Models
+@model Library.Models.Catalog
+
+<h2>Catalog Details</h2>
+<hr />
+<h3>Catalog Contains: @Html.DisplayFor(model => model.Quantity)</h3>
+
+@if (@Model.JoinBookCatalog.Count == 0)
+{
+  <p>This catalog does not have any books yet!</p>
+}
+else
+{
+  <h4>This catalog has the following books:</h4>
+  <ul>
+  @foreach (BookCatalog join in Model.JoinBookCatalog)
+    {
+      <li>Book: @join.Book.Title</li>
+      @using (Html.BeginForm("DeleteJoin", "Books"))
+      {
+        @Html.Hidden("joinId", @join.BookCatalogId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Catalog", "Edit", new { id = Model.CatalogId }) | @Html.ActionLink("Delete Catalog", "Delete", new { id = Model.CatalogId }) | @Html.ActionLink("Add a Book", "AddBook", new {
+  id = Model.CatalogId }) | @Html.ActionLink("Add Librarian to Manage this Catalog", "AddLibrarian", new {
+  id = Model.CatalogId })</p>

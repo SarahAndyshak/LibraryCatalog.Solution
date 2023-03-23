@@ -1,3 +1,19 @@
+body {
+	background: linear-gradient(rgba(255, 255, 255, .7), rgba(255, 255, 255, .7)),url("./../Images/bookshelf.jpeg"), center no-repeat fixed;
+	background-size: cover;
+  font-size: larger;
+  font-family: 'Roboto';
+} 
+
+div#splash-body {
+  border-radius: 5%;
+  background-color: rgb(243, 244, 234, .8); 
+  margin-top: 10px;
+  margin-left: 5%;
+  margin-right: 5%;
+  padding: 10px;
+}
+
 div#footer {
   text-align: center;
   position:fixed;
@@ -5,6 +21,65 @@ div#footer {
   left:0px;
   width:100%;
   color:#CCC;
-  background:#333;
+  background:rgb(140, 139, 139);
   padding:8px;
-};
+}
+
+hr {
+  width: 25%;
+  border-style: dotted none none;
+  border-width: 7px;
+  border-color: rgb(175,181,188);
+}
+
+input[type=text] {
+  width: 300px;
+  height: 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  background-image: linear-gradient(rgb(187, 208, 187),rgb(238, 244, 240));
+  border: none;
+}
+
+input[type=password] {
+  width: 300px;
+  height: 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  background-image: linear-gradient(rgb(187, 208, 187),rgb(238, 244, 240));
+  border: none;
+}
+
+input[type=text]:focus {
+  width: 30%;
+}
+
+input[type=password]:focus {
+  width: 30%;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(63, 83, 64);
+}
+
+a:hover {
+	text-decoration: none;
+	color: rgb(70, 98, 71);
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+}
+
+.button {
+  background: linear-gradient(rgb(187, 208, 187),rgb(238, 244, 240));
+  border-style: none;
+  padding: 5px;
+}
+
+.button:hover {
+  background: linear-gradient(rgb(94, 112, 94),rgb(216, 239, 223));
+}

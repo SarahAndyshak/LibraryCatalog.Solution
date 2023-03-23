@@ -1,0 +1,35 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Security.Claims
+@using Library.Models
+@model Library.Models.Checkout
+
+<h2>Checked Out Details</h2>
+<hr />
+<h3>Checkout History: @Html.DisplayFor(model => model.History)</h3>
+
+@if (@Model.JoinBookCheckout.Count == 0)
+{
+  <p>This checkout does not have any books yet!</p>
+}
+else
+{
+  <h4>This checkout has the following books:</h4>
+  <ul>
+  @foreach (BookCheckout join in Model.JoinBookCheckout)
+    {
+      <li>Book: @join.Book.Title</li>
+      @using (Html.BeginForm("DeleteJoin", "Books"))
+      {
+        @Html.Hidden("joinId", @join.BookCheckoutId)
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Checkout", "Edit", new { id = Model.CheckoutId }) | @Html.ActionLink("Delete Checkout", "Delete", new { id = Model.CheckoutId }) | @Html.ActionLink("Add a Book", "AddBook", new {
+  id = Model.CheckoutId }) | @Html.ActionLink("Patron to Checkout", "AddPatron", new {
+  id = Model.CheckoutId })</p>
